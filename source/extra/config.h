@@ -219,7 +219,7 @@
 // このシンボルを定義するとOptions["Hash"]として131072(=128*1024[MB]。すなわち128GB)超えの置換表が扱えるようになる。
 // Stockfishのコミュニティではまだ議論中なのでデフォルトでオフにしておく。
 // cf. 128 GB TT size limitation : https://github.com/official-stockfish/Stockfish/issues/1349
-// #define USE_HUGE_HASH
+#define USE_HUGE_HASH
 
 // --------------------
 // release configurations
