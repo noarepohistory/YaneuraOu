@@ -127,8 +127,13 @@ TTEntry* TranspositionTable::probe(const Key key, bool& found
 
 		// Stockfish公式で置換表サイズ128GB超えに対応するまでデフォルトで無効にしておく。
 #if defined (IS_64BIT) && defined(USE_SSE2) && defined(USE_HUGE_HASH)
-		uint64_t highProduct;
-		_umul128(key + (key << 32), block, &highProduct);
+		__extension__ typedef unsigned __int128 uint128;
+		uint128 p = static_cast<uint128>(key + (key << 32)) * static_cast<uint128>(block);
+		uint64_t highProduct = static_cast<uint64_t>(p >> 64);
+
+		size_t index = (highProduct & ~1) | (key & 1);
+#else
+		size_t index = (((uint32_t(key >> 1) * uint64_t(block)) >> 32) & ~1) | (key & 1);
 		size_t index = (highProduct & ~1) | (key & 1);
 #else
 		size_t index = (((uint32_t(key >> 1) * uint64_t(block)) >> 32) & ~1) | (key & 1);
