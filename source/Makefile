@@ -230,12 +230,12 @@ profuse-sse42:
 
 pgo:
 	$(MAKE) profgen
-	@./$(TARGET) EvalDir ../build/eval , bench , quit
+	@./$(TARGET) EvalDir ../build/eval , bench 16384 96 20 default time , quit
 	@touch $(SOURCES)
 	$(MAKE) profuse
 pgo-sse42:
 	$(MAKE) profgen-sse42
-	@./$(TARGET) EvalDir ../build/eval , bench , quit
+	@./$(TARGET) EvalDir ../build/eval , bench 16384 96 20 default time , quit
 	@touch $(SOURCES)
 	$(MAKE) profuse-sse42
 
