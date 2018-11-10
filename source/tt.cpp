@@ -134,9 +134,6 @@ TTEntry* TranspositionTable::probe(const Key key, bool& found
 		size_t index = (highProduct & ~1) | (key & 1);
 #else
 		size_t index = (((uint32_t(key >> 1) * uint64_t(block)) >> 32) & ~1) | (key & 1);
-		size_t index = (highProduct & ~1) | (key & 1);
-#else
-		size_t index = (((uint32_t(key >> 1) * uint64_t(block)) >> 32) & ~1) | (key & 1);
 		// uint32_t(key)*block / 2^32 は、0～(block-1)の値。
 		// keyのbit0は、先後フラグなのでindexのbit0に反映されなければならない。
 #endif
