@@ -157,7 +157,7 @@ struct TranspositionTable {
 
 		// cf. 128 GB TT size limitation : https://github.com/official-stockfish/Stockfish/issues/1349
 		__extension__ typedef unsigned __int128 uint128;
-		uint128 p = static_cast<uint128>(key + (key << 32)) * static_cast<uint128>(block);
+		uint128 p = static_cast<uint128>(key << 16) * static_cast<uint128>(clusterCount);
 		uint64_t highProduct = static_cast<uint64_t>(p >> 64);
 
 		// この計算ではhighProductに第1パラメーターの上位bit周辺が色濃く反映されることに注意。
